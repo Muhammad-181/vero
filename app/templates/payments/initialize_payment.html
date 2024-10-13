@@ -1,0 +1,260 @@
+
+{% extends 'app/base.html' %}
+{% load static %}
+
+
+{% block title %}
+{{ request.user.username }}
+{% endblock %}
+
+
+
+{% block content %}
+            <!-- ============================================================== -->
+            <!-- Start Page Content here -->
+            <!-- ============================================================== -->
+           
+            <div class="content-page">
+                <div class="content">
+            
+                    <!-- Start Content-->
+                    <div class="container-fluid">
+                        
+                        <!-- start page title -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box">
+                                    
+                                    <h4 class="page-title">Make Payment</h4>
+                                </div>
+                            </div>
+                        </div>     
+                        <!-- end page title --> 
+            
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card-box">
+                                    <!-- <div class="col-md-12 mb-2">
+                                        <label class="labels">First Name</label>
+                                        {{ form.as_p }}
+                                    </div> -->
+
+                                    
+
+
+                                    <h4 class="header-title"></h4>
+                                    <div class="mb-2">
+                                        <div class="row">
+                                            <div class="col-12 text-sm-center form-inline" >
+                                                <form action="" method="POST" action="{% url 'payments:initialize_payment' %}" id="payment-form" class="d-flex align-items-center flex-column flex-sm-row"> 
+                                                    {% csrf_token %}
+                                                    <div class="form-group mr-3"> 
+                                                      <label for="fee">Fee:</label>
+                                                      <select class="form-control" name="fee" id="id_fee">
+                                                        <option value="">Select Fee</option>
+                                                        {% for fee in fees %}
+                                                        <option value="{{ fee.id }}">{{ fee.name }}</option>
+                                                        {% endfor %}
+                                                      </select>
+                                                    </div>
+                                                    <div class="form-group mr-3">
+                                                      <label for="level">Level:</label>
+                                                      <select class="form-control" name="level" id="id_level">
+                                                        <option value="">Select Level</option>
+                                                      </select>
+                                                    </div>
+                                                    <div class="form-group mr-3">
+                                                      <label for="amount">Amount:</label>
+                                                      <span id="amount-value"></span>
+                                                    </div>
+                                                    <button type="submit" class="btn bgPrimary nonBtn mt-2 waves-effect waves-light">
+                                                      <i class="bx bx-save"></i> Pay
+                                                    </button>
+                                                  </form>
+
+                                                  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                                                    <script>
+                                                    $(document).ready(function()
+                                                    {
+                                                        $("#id_fee").change(function() {
+                                                        var feeId = $(this).val();
+                                                        var levelSelect = $("#id_level");
+                                                        levelSelect.empty();
+                                                        if (feeId) {
+                                                            $.ajax({
+                                                            url: "{% url 'payments:get_levels' %}", 
+                                                            data: {
+                                                                'fee_id': feeId
+                                                            },
+                                                            success: function(data) {
+                                                                levelSelect.append('<option value="">Select Level</option>');
+                                                                $.each(data, function(key, value) {
+                                                                levelSelect.append('<option value="' + key + '">' + value + '</option>');
+                                                                });
+                                                            }
+                                                            });
+                                                        } else {
+                                                            levelSelect.append('<option value="">Select Level</option>');
+                                                        }
+                                                        });
+
+                                                        $("#id_fee, #id_level").change(function() {
+                                                        var feeId = $("#id_fee").val();
+                                                        var levelId = $("#id_level").val();
+                                                        if (feeId && levelId) {
+                                                            $.ajax({
+                                                            url: "{% url 'payments:get_amount' %}", 
+                                                            data: {
+                                                                'fee_id': feeId,
+                                                                'level_id': levelId
+                                                            },
+                                                            success: function(data) {
+                                                                $("#amount-value").text(data.amount);
+                                                                // Store feeamount_id in a hidden input field or a data attribute
+                                                                $("#feeamount-id").val(data.feeamount_id); 
+                                                            }
+                                                            });
+                                                        } else {
+                                                            $("#amount-value").text("");
+                                                        }
+                                                        });
+                                                    });
+                                                    </script>
+                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="table-responsive">
+                                        <table id="demo-foo-filtering" class="table table-bordered toggle-circle mb-0" data-page-size="7">
+                                            <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th data-toggle="true">Name</th>
+                                                <!-- <th data-hide="phone">Amount</th> -->
+                                                <th data-hide="phone">Amount</th>
+                                                <th data-hide="phone">Timestamp</th>
+                                                <th data-hide="phone">status</th>
+                                                <!-- <th data-hide="phone">Category</th> -->
+                                                <th data-hide="phone">Action</th>
+                                            </tr>
+                                            </thead>
+                                           
+            
+                                            <tbody>
+                                            {% for obj in reciepts %}
+                                                <tr>
+                                                    <td>#</td>
+                                                    <td>{{ obj.fee }}</td>
+                                                    <td>{{ obj.fee.amount }}</td>
+                                                    
+                                                    <td>{{ obj.timestamp }}</td>
+                                                    <td>
+                                                        {% if obj.verified %}
+                                                        <i style="color: green;" class='bx bxs-check-circle'></i> Paid
+                                                        {% else %}
+                                                        <i style="color: red;" class='bx bxs-x-circle'></i> Failed
+                                                        {% endif %}
+                                                    </td>
+                                                    <!-- <td><?php echo $row->pat_type;?></td> -->
+                                                    
+                                                    <td><a href="{% url 'payments:reciept2pdf' reference=obj.reference %}" class="badge badge-success">
+                                                        <i class='bx bxs-file-export'></i> Print reciept</a></td>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                            <tfoot>
+                                                <tr class="active">
+                                                    <td colspan="8" class="footable-visible">
+                                                        <div class="text-right">
+                                                            <!-- <ul class="pagination pagination-rounded justify-content-end footable-pagination m-t-10 mb-0">
+                                                                <li class="footable-page-arrow disabled">
+                                                                    <a data-page="first" href="#first">«</a>
+                                                                </li>
+                                                                <li class="footable-page-arrow disabled">
+                                                                    <a data-page="prev" href="#prev">‹</a>
+                                                                </li>
+                                                                <li class="footable-page active">
+                                                                <a data-page="0" href="#">1</a>
+                                                                </li>
+                                                                <li class="footable-page-arrow disabled">
+                                                                <a data-page="next" href="#next">›</a>
+                                                                </li>
+                                                                <li class="footable-page-arrow disabled">
+                                                                <a data-page="last" href="#last">»</a>
+                                                                </li>
+                                                            </ul> -->
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                </tfoot>
+                                        </table>
+                                    </div> <!-- end .table-responsive-->
+                                </div> <!-- end card-box -->
+                            </div> <!-- end col -->
+                        </div>
+                        <!-- end row -->
+            
+                    </div> <!-- container -->
+            
+                </div> <!-- content -->
+            
+                <!-- Footer Start -->
+                {% include "students/footer.html" %}
+                                <!-- end Footer -->
+            
+            </div>
+       
+            
+        <!-- ============================================================== -->
+        <!-- End Page content -->
+        <!-- ============================================================== -->
+
+
+{% endblock %}
+
+
+<div class="content-page">
+    <div class="content">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+
+            <h1>Make a Payment</h1>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Pay</button>
+            </form>
+
+        </div> <!-- container -->
+
+    </div> <!-- content -->
+
+    <!-- Footer Start -->
+    <footer class="footer">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    2020 - <?php echo date('Y'); ?> &copy; Hospital Management System. </a>
+                </div>
+    
+            </div>
+        </div>
+    </footer>
+    
+    <!-- end Footer -->
+
+</div>
+
+
+<form action="" method="post">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="fee">Make Payment: </label>
+            {{ form.fee }}
+        <!-- <input id="demo-foo-search" type="text" placeholder="Search" class="form-control form-control-sm" autocomplete="on"> -->
+    </div>
+    <button type="submit" style="margin-left: 1.5rem;" class="btn bgPrimary nonBtn mt-2 waves-effect waves-light "><i class="bx bx-save"></i> Pay</button>
+
+</form>

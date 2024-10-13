@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receipt</title>
+    <link rel="stylesheet" href="style.css"> </head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Receipt</h1>
+            <p> NASSA</p>
+            <p>NSUK Chapter</p>
+        </header>
+        <main class="main">
+            <div class="customer-info">
+                <h2>Customer Information</h2>
+                <p>Name: {{ student.last_name }}</p>
+                <p>Email: {{ payment.fee.name }}</p>
+                </div>
+            <div class="order-details">
+                <h2>Order Details</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Description</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in items %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ item.description }}</td>
+                            <td>{{ item.quantity }}</td>
+                            <td>{{ item.pric }}</td>
+                            <td>{{ item.quanti.price }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <div class="">
+                    <h1>Your QR Code:</h1>
+                    <img src="data:image/png;base64,{{ qrcode }}" alt="QR Code">
+                </div>
+            </div>
+            <p class="payment-method">Payment Method: {{ payment_method }}</p>
+        </main>
+        <footer class="footer">
+            <p>Thank you for your business!</p>
+        </footer>
+    </div>
+</body>
+</html>

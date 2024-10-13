@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Receipt</title>
+    <link rel="shortcut icon" href="{% static 'assets/images/nacosnobg.png' %}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            page-break-inside: avoid;
+        }
+
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #333;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            letter-spacing: 2px;
+        }
+
+        .details {
+            margin-bottom: 20px;
+        }
+
+        .details p {
+            margin: 5px 0;
+            font-size: 16px;
+        }
+
+        .details p span {
+            font-weight: bold;
+        }
+
+        .payment-info {
+            margin-bottom: 20px;
+        }
+
+        .payment-info table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .payment-info th, .payment-info td {
+            text-align: left;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .payment-info th {
+            background-color: #f1f1f1;
+        }
+
+        .qr-code {
+            text-align: right;
+            margin-top: 20px;
+        }
+
+        .qr-code img {
+            width: 150px;
+            height: 150px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #777;
+        }
+
+        .print-button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .print-button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .print-button:hover {
+            background-color: #45a049;
+        }
+
+        @media print {
+            .print-button-container {
+                display: none; /* Hide print button when printing */
+            }
+
+            .container {
+                width: 100%; 
+                margin: 0; 
+                padding: 10px; 
+                border: none; 
+                box-shadow: none;
+            }
+
+            @page {
+                margin: 1cm;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="receipt">
+        <!-- Header -->
+        <div class="header">
+            <h1>Computer Science Department</h1>
+            <h3>Nasarawa State University, Keffi</h3>
+            <p>Official Payment Receipt</p>
+        </div>
+
+        <!-- Student Details -->
+        <div class="details">
+            <p><span>Student Name:</span> {{ student.first_name }} {{ student.other_names }} {{ student.last_name }}</p>            
+            <p><span>Matric Number:</span> {{ matric }}</p>
+            <p><span>Department:</span> {{ student.department }}</p>
+            <p><span>Payment Date:</span> {{ date }}</p>
+        </div>
+
+        <!-- Payment Info -->
+        <div class="payment-info">
+            <table>
+                <tr>
+                    <th>Fee</th>
+                    <th>Level</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                </tr>
+                <tr>
+                    <td>{{ payment.fee.fee }}</td>
+                    <td>{{ payment.fee.level }}</td>
+                    <td>{{ payment.fee.amount }}</td>
+                    {% if payment.verified %}
+                        <td>Paid</td>
+                    {% else %}
+                        <td>Failed</td>
+                    {% endif %}
+                </tr>
+            </table>
+        </div>
+
+        <!-- QR Code -->
+        <div class="qr-code">
+            <p>Scan the QR code to verify the receipt</p>
+            <img src="data:image/png;base64,{{ qrcode }}" alt="QR Code">
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>Thank you for your payment</p>
+            <p>School Address | Contact Info</p>
+        </div>
+    </div>
+
+    <!-- Print Button -->
+    <div class="print-button-container">
+        <button class="print-button" onclick="printReceipt()">Print Receipt</button>
+    </div>
+
+    <script>
+        function printReceipt() {
+            const receiptContent = document.getElementById('receipt').innerHTML;
+            const originalContent = document.body.innerHTML;
+
+            // Replace the body content with the receipt content
+            document.body.innerHTML = receiptContent;
+
+            window.print(); // Trigger the print dialog
+
+            // Restore the original content after printing
+            document.body.innerHTML = originalContent;
+        }
+    </script>
+</body>
+</html>

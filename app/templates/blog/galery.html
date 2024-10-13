@@ -1,0 +1,58 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+
+{% block title %}
+ Gelery -
+{% endblock %}
+
+
+
+{% block content %}
+            <!-- ============================================================== -->
+            <!-- Start Page Content here -->
+            <!-- ============================================================== -->
+            <!-- Home Section -->
+            
+             
+                    <section class="council" id="council">
+                            <div class="council-head">
+                                    <div class="text">
+                                        Our Gallery
+                                    </div>
+                            </div>
+                    </section>
+
+
+                    <!-- BLOG Section -->
+                    <section class="section post" id="post">
+                        <div class=" container">
+                            {% for gallery in galleries %}
+                            <h2>{{ gallery.event }}</h2>
+                            <p>{{ gallery.description }}</p>
+                                <div class="gallery">
+                                    {% for image in gallery.images.all %}
+                                    <img src="{{ image.image.url }}" alt="Image for {{ gallery.event }}" onclick="openLightbox(this, '{{ gallery.event }}')">
+                                    {% empty %}
+                                        <p>No images available for this gallery.</p>
+                                    {% endfor %}
+                                </div>
+                                <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+                                    <div id="lightbox-title" class="lightbox-title"></div>
+                                    <img id="lightbox-img" src="" alt="Lightbox Image">
+                                </div>
+                            {% endfor %}
+                                
+                            
+                        </div>
+                    </section>
+            
+               
+
+        <!-- ============================================================== -->
+        <!-- End Page content -->
+        <!-- ============================================================== -->
+
+
+{% endblock %}
+

@@ -1,0 +1,182 @@
+{% load static %}
+<!DOCTYPE html>
+<!-- Coding by CodingLab | www.codinglabweb.com  -->
+<html lang="en">
+<head>
+
+    <meta property="og:url" content="https://nassa-production.up.railway.app/">
+    <meta property="og:description" content="Natural and Applied Science Students Association">
+    <meta property="og:site_name" content="NASSA (NSUK CHAPTER)">
+    
+    <meta property="og:image" content="https://myawss3sitebucket.s3.amazonaws.com/images/favicon.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Site Image">
+
+
+
+
+
+
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> {% block title %}{% endblock %} CMP-NSUK</title>
+
+    <link rel="shortcut icon" href="{% static 'blog/images/nassalogo.ico' %}" type="image/x-icon">
+    <!-- Swiper JS CSS-->
+    <link rel="stylesheet" href="{% static 'blog/css/swiper-bundle.min.css' %}">
+
+
+
+    <!-- Boxicons -->
+    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+        
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'blog/css/style.css' %}">
+    
+    {% block css %} {% endblock %}
+    
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.css">
+
+
+</head>
+<body>
+
+    
+    <header class="header">
+            <nav class="nav container flex">
+                <a href="{% url 'app:index' %}" class="logo-content flex">
+                    <!-- <i class='bx bx-coffee logo-icon'></i> -->
+                    <img src="{% static 'blog/images/nacosnobg.png' %}" alt="" class="logo-img">
+                    <span class="logo-text"><b>CMP-NSUK</b></span>
+                </a>
+
+                    <div class="menu-content">
+                            <ul class="menu-list flex">
+                                    <li><a href="{% url 'app:index' %}" class="nav-link ">Home</a></li>
+                                    <li><a href="{% url 'app:event_list' %}" class="nav-link">Blog</a></li>
+                                    <li><a href="{% url 'app:galery' %}" class="nav-link">Galery</a></li>
+                                    <li><a href="{% url 'students:index' %}" class="nav-link login">Student Portal</a></li>
+                            </ul>
+
+                            <div class="media-icons flex">
+                                   CMP - NSUK
+                            </div>
+
+                            <i class='bx bx-x navClose-btn'></i>
+                        </div>
+                        
+                        <!-- <div class="contact-content flex">
+                            <i class='bx bx-phone phone-icon' ></i>
+                            <span class="phone-number">0022-0303-2030</span>
+                        </div> -->
+
+                        <i class='bx bx-menu navOpen-btn'></i>
+                </nav>
+        
+    </header>
+    <main>
+        
+
+            {% block content %}
+            <!-- ============================================================== -->
+            <!-- Start Page Content here -->
+            <!-- ============================================================== -->
+        
+            <!-- ============================================================== -->
+            <!-- End Page content -->
+            <!-- ============================================================== -->
+
+          
+
+            {% endblock %}
+            <!-- Footer Section -->
+            <footer class="section footer">
+                <div class="footer-container container">
+                        <div class="footer-content">
+                            <a href="#" class="logo-content flex">
+                                <img src="{% static 'blog/images/nacosnobg.png' %}" alt="" class="logo-img">
+                                    <span class="logo-text">COMPUTER SCIENCE DEPARTMENT, NSUK</span>
+                                </a>
+
+                                <p class="content-description">Department of Computer Science, Faculty of Natural and Applied Science</p>
+
+                                <div class="footer-location flex">
+                                    <i class='bx bx-map map-icon'></i>
+                                    
+                                    <div class="location-text">
+                                        Computer Science Department, Beside Assembly Hall, Main Campus, Nasarawa State University keffi, Nasarawa State
+                                    </div>
+                                </div>
+                        </div>
+
+                        <div class="footer-linkContent">
+                                <ul class="footer-links">
+                                        <h4 class="footerLinks-title">Links</h4>
+
+                                        <li><a href="{% url 'students:index' %}" class="footer-link">Students Profile</a></li>
+                                        <li><a href="{% url 'app:event_list' %}" class="footer-link">Events</a></li>
+                                        <li><a href="{% url 'app:galery' %}" class="footer-link">Galery</a></li>
+                                </ul>
+                                <ul class="footer-links">
+                                        <h4 class="footerLinks-title">Useful Links</h4>
+
+                                        <li><a href="https://nsuk.edu.ng" target="_blank" rel="noopener noreferrer" class="footer-link">university portal</a></li>
+                                        <li><a href="https://ug.nsuk.edu.ng" target="_blank" rel="noopener noreferrer" class="footer-link">undergraduate portal</a></li>
+                                        <li><a href="https://spgs.nsuk.edu.ng" target="_blank" rel="noopener noreferrer" class="footer-link">postgraduate portal</a></li>
+                                </ul>
+                                <!-- <ul class="footer-links">
+                                        <h4 class="footerLinks-title">Support</h4>
+
+                                        <li><a href="#" class="footer-link">About Us</a></li>
+                                        <li><a href="#" class="footer-link">FAQs</a></li>
+                                        <li><a href="#" class="footer-link">Private Policy</a></li>
+                                        <li><a href="#" class="footer-link">Help Us</a></li>
+                                </ul> -->
+                        </div>
+                </div>
+                <div class="footer-copyRight">&#169; NASSA NSUK. All rigths reserved</div>
+            </footer>
+
+            <!-- Scroll Up -->
+            <a href="#home" class="scrollUp-btn flex">
+                    <i class='bx bx-up-arrow-alt scrollUp-icon'></i>
+            </a>
+    
+    </main>
+
+
+
+<!-- Swiper JS -->
+<script src="{% static 'blog/js/swiper-bundle.min.js' %}"></script>
+
+
+<!-- Scroll Reveal -->
+<!-- <script src="js/scrollreveal.js"></script> -->
+
+<!-- JavaScript -->
+    <script src="{% static 'blog/js/script.js' %}"></script>
+     <!-- jQuery -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" 
+     integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" 
+     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+     <!-- Notify.js -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js" 
+     integrity="sha512-efUTj3HdSPwWJ9gjfGR71X9cvsrthIA78/Fvd/IN+fttQVy7XWkOAXb295j8B3cmm/kFKVxjiNYzKw9IQJHIuQ==" 
+     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        $(document).ready(function() {
+            {% if messages %}
+                {% for message in messages %}
+                    $.notify("{{ message }}", "{{ message.tags }}");
+                {% endfor %}
+            {% endif %}
+        });
+    </script>
+</body>
+</html>
+
+

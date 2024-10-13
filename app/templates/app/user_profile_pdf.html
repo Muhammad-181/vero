@@ -1,0 +1,85 @@
+
+    {% load static %}
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>{{ student.last_name }} {{ student.first_name }}'s Student Information</title>
+        <style>
+            body {
+                font-family: 'Arial', sans-serif;
+            }
+            .container {
+                width: 800px;
+                margin: 30px auto;
+                border: 2px solid #007bff;
+                padding: 20px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                display: grid;
+                grid-template-columns: 1fr 2fr; /* Adjust ratio as needed */
+                gap: 20px;
+            }
+            .profile-image {
+                width: 100%;
+                height: auto;
+                border-radius: 50%;
+                object-fit: cover;
+                border: 5px solid #007bff; 
+            }
+            
+            .profile-info div {
+                display: flex;
+                align-items: center; /* Vertically center items */
+                margin-bottom: 10px;
+            }
+            .profile-info .label {
+                font-weight: bold;
+                color: #333;
+                width: 120px; /* Adjust width as needed */
+            }
+            .header h2 {
+                color: #007bff;
+                grid-column: span 2; /* Span across both columns */
+                text-align: center;
+                margin-bottom: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <h2>{{ student.last_name }} {{ student.first_name }}'s Student Information</h2>
+            </div>
+            <img class="profile-image" src="{% if request.user.studentprofile.profile_picture %}{{ request.user.studentprofile.profile_picture.url }}{% else %}{% static 'assets/images/anondp.jpg' %}{% endif %}" alt="Profile Picture">
+            <div class="profile-info">
+                <div>
+                    <span class="label">Matric Number:</span>
+                    <span>{{ request.user.username }}</span>
+                </div>
+                <div>
+                    <span class="label">Department:</span>
+                    <span>{{ student.department }}</span>
+                </div>
+                <div>
+                    <span class="label">Program:</span>
+                    <span>BSc Computer Science</span> 
+                </div>
+                <div>
+                    <span class="label">Admission Year:</span>
+                    <span>{{ student.admission_year }}</span>
+                </div>
+                <div>
+                    <span class="label">Level:</span>
+                    <span>{{ student.admission_year.level }}</span> 
+                </div>
+                <div>
+                    <span class="label">Phone Number:</span>
+                    <span>{{ student.phone_number }}</span>
+                </div>
+                <div>
+                    <span class="label">Email Address:</span>
+                    <span>{{ student.inst_email }}</span>
+                </div>
+            </div>
+        </div>
+    </body>
+    </html>

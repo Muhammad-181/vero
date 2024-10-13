@@ -1,0 +1,373 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+
+{% block title %}
+
+{% endblock %}
+
+
+
+{% block content %}
+            <!-- ============================================================== -->
+            <!-- Start Page Content here -->
+            <!-- ============================================================== -->
+            <!-- Home Section -->
+              <!-- Home Section -->
+                    <section class="home" id="home">
+                            <div class="home-content">
+                                    <div class="swiper mySwiper">
+                                            <div class="swiper-wrapper">
+                                                    <div class="swiper-slide">
+                                                            <img src="{% static 'blog/images/carousel-1.jpg' %}" alt="" class="home-img">
+
+                                                            <div class="home-details">
+                                                                    <div class="home-text">
+                                                                            <h4 class="homeSubtitle"></h4>
+                                                                            <h2 class="homeTitle"></h2>
+                                                                    </div>
+
+                                                                    <!-- <button class="button"></button> -->
+                                                            </div>
+                                                    </div>
+
+                                                    <div class="swiper-slide">
+                                                            <img src="{% static 'blog/images/nacos1.jpg' %}" alt="" class="home-img">
+
+                                                            <div class="home-details">
+                                                                    <div class="home-text">
+                                                                            <h4 class="homeSubtitle"></h4>
+                                                                            <h2 class="homeTitle"></h2>
+                                                                    </div>
+
+                                                                    <!-- <button class="button">Explore</button> -->
+                                                            </div>
+                                                    </div>
+
+                                                    <div class="swiper-slide">
+                                                            <img src="{% static 'blog/images/nacos2.jpg' %}" alt="" class="home-img">
+
+                                                            <div class="home-details">
+                                                                    <div class="home-text">
+                                                                            <h4 class="homeSubtitle"></h4>
+                                                                            <h2 class="homeTitle"></h2>
+                                                                    </div>
+
+                                                                    <!-- <button class="button">Explore</button> -->
+                                                            </div>
+                                                    </div>
+
+                                                    <div class="swiper-slide">
+                                                            <img src="{% static 'blog/images/nacos3.jpg' %}" alt="" class="home-img">
+
+                                                            <div class="home-details">
+                                                                    <div class="home-text">
+                                                                            <h4 class="homeSubtitle"></h4>
+                                                                            <h2 class="homeTitle"></h2>
+                                                                    </div>
+
+                                                                    <!-- <button class="button">Explore</button> -->
+                                                            </div>
+                                                    </div>
+
+                                                 
+                                            </div>
+
+                                            <div class="swiper-button-next swiper-navBtn"></div>
+                                            <div class="swiper-button-prev swiper-navBtn"></div>
+                                            <div class="swiper-pagination"></div>
+                                    </div>
+                            </div>
+                    </section>
+
+                
+            <!-- About Section -->
+                    <section class="section about" id="about">
+                            <div class="about-content container">
+                                    
+
+                                    <div class="about-details">
+                                            <div class="about-text">
+                                                    <h4 class="content-subtitle"><i>About Us</i></h4>
+                                                    <h2 class="content-title">NATURAL AND APPLIED SCIENCE STUDENTS ASSOCIATION (NASSA), Nsuk chapter</h2>
+                                                    <p class="content-description">Nigeria Association of Computing Students (NACOS) is the umbrella body for 
+                                                            students studying Computer Science,
+                                                            Computer Engineering, Information Systems, Cyber Security, Software Engineering, Telecommunications 
+                                                            Engineering, and all IT-related courses in Nigeria and have been in existence for over two decades 
+                                                            and NACOS can boast of its presence in almost all tertiary institutions in Nigeria (including privately owned ones).</p>
+
+                                               
+                                            </div>
+
+                                            <div class="about-buttons flex">
+                                                    <button class="button">Contact Us</button>
+                                                    <a href="{% url 'app:event_list' %}" class="about-link flex">
+                                                            <span class="link-text">Events</span>
+                                                            <i class='bx bx-right-arrow-alt about-arrowIcon'></i>
+                                                    </a>
+                                            </div>
+                                    </div>
+
+                                    <div class="about-imageContent">
+                                            <img src="{% static 'blog/images/nacos.png' %}" alt="" class="about-img">
+
+                                           
+                                    </div>
+                            </div>
+                    </section>
+
+                
+            <!-- president Section -->
+                    <section class="section president" id="president">
+                            <div class="president-content container">
+                                    <div class="president-imageContent">
+                                            <img src="{% static 'blog/images/hod.jpg' %}" alt="" class="president-img">
+
+                                           
+                                    </div>
+
+                                    <div class="president-details">
+                                            <div class="president-text">
+                                                    <!-- <h4 class="content-subtitle"><i>About Us</i></h4> -->
+                                                    <h2 class="content-title">PROF. BABA PUPA AJAYI</h2>
+                                                    <p class="content-description">Head of Department, Computer Science Nasarawa State University Keffi</p>
+
+                                                    <ul class="president-lists flex">
+                                                            <li class="president-list">Facbook</li>
+                                                            <!-- <li class="president-list dot">.</li> -->
+                                                            <li class="president-list">Twitter</li>
+                                                            <!-- <li class="president-list dot">.</li> -->
+                                                            <li class="president-list">Linkdln</li>
+                                                    </ul>
+                                            </div>
+
+                                           
+                                    </div>
+
+                                    
+                            </div>
+                    </section>
+
+                
+            <!-- departments Section -->
+            <!-- <section class="section menu" id="menu">
+                    <div class="menu-container container">
+                    <div class="menu-text">
+                        <h2 class="section-title"> Departments</h2>
+                      
+                    </div>
+                
+                    <div class="menu-content">
+                        {% for obj in departments %}
+                            <div class="column">
+                                    <div class="content">
+                                            <div class="heading">
+                                                    <img src="{{obj.logo.url}}" alt="" class="resize-image">
+                                            </div>
+                                            <div class="body">
+                                                <a href="{% url 'app:department' obj.uid %}" style="color: black;">
+                                                        <h2>{{obj.name}}</h2>
+                                                </a>
+                                            </div>
+                                    </div>
+                                    
+                            </div>
+                        {% endfor %}
+                          
+                        
+                    </div>
+                    </div>
+                </section> -->
+            
+                
+
+            <!-- BLOG Section -->
+            <section class="section post bg-primary" id="post">
+                    <div class="post-container container">
+                    <div class="post-text">
+                        <!-- <h4 class="section-subtitle"><i>Our Departments</i></h4> -->
+                        <h2 class="section-title"> Events</h2>
+                        <!-- <p class="section-description">
+                        Our place designed by pro architecture with psychologist to build best place suit you. Our place designed by pro architecture with psychologist to build best place suit you.
+                        </p> -->
+                    </div>
+                
+                    <div class="post-content">
+                        {% for obj in events %}
+                        <div class="column">
+                                <div class="content">
+                                        <div class="heading">
+                                                <img src="{{ obj.image.url }}" alt="" class="resize-image">
+                                        </div>
+                                        <div class="body">
+                                                
+                                                <div class="authordate">
+                                                        <div class="author">
+                                                                {{ obj.author.username }}
+                                                        </div>
+                                                        <div class="date">
+                                                                {{ obj.event_date }}
+                                                        </div>
+                                                </div>
+                                                <div class="body-head">
+                                                        {{ obj.title }}
+                                                </div>
+                                                <div class="body-text">
+                                                        <p>{{ obj.body|slice:100 }}  ....</p>
+                                                </div>
+                                                <button class=" read-more"><a href="{% url 'app:event_detail' obj.uid %}">Read more >>></a></button>
+                                        </div>
+                                </div>
+                                
+                        </div>
+                        {% endfor %}
+                        
+                    </div>
+                    </div>
+                </section>
+
+
+
+                <!-- accordion section -->
+
+                <section class="section">
+                        <div>
+                            <h2 class="section-title">Frequently asked questions</h2>
+                            <p class="section-description"></p>
+                            <div class="accordion">
+                                {% for obj in faqs %}
+                                <div class="accordion-item">
+                                    <div class="accordion-header" id="heading{{ obj.pk }}">
+                                        <h2 class="accordion-title">
+                                            <button class="accordion-button" type="button" data-target="#collapse{{ obj.pk }}">
+                                                {{ obj.question }}
+                                            </button>
+                                        </h2>
+                                    </div>
+                                    <div id="collapse{{ obj.pk }}" class="accordion-collapse">
+                                        <div class="accordion-body">
+                                            {{ obj.answer }}
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </section>
+                    
+                
+
+                
+
+            <!-- Newsletter Section -->
+                    <section class="section contact-us">
+                            <div class="content contactUs">
+                                    <div class="left-side">
+                                    <div class="address details">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        <div class="topic">Address</div>
+                                        <div class="text-one">Department of Computer Science, Main Campus</div>
+                                        <div class="text-two">Nasarawa state university, Kefii</div>
+                                    </div>
+                                    <div class="phone details">
+                                        <i class="fas fa-phone-alt"></i>
+                                        <div class="topic">Phone</div>
+                                        <div class="text-one">+23490 9893 5647</div>
+                                        <div class="text-two">+23490 3434 5678</div>
+                                    </div>
+                                    <div class="email details">
+                                        <i class="fas fa-envelope"></i>
+                                        <div class="topic">Email</div>
+                                        <div class="text-one">computersciencedepaertment@nsuk.edu.ng</div>
+                                        <div class="text-two">hodcomputerscience@nsuk.edu.ng</div>
+                                    </div>
+                                    </div>
+                                    <div class="right-side">
+                                    <div class="topic-text">Send us a message</div>
+                                    <!-- <p>If you have any work from me or any types of quries related to my tutorial, you can send me message from here. It's my pleasure to help you.</p> -->
+                                    <form method="post" action="{% url 'app:index' %}">
+                                        {% csrf_token %}
+                                        <div class="input-box">
+                                            <input type="text" name="name" placeholder="Enter your name" required value="{{ messageForm.name.value|default_if_none:'' }}"/>
+                                        </div>
+                                        <div class="input-box">
+                                            <input type="email" name="email" placeholder="Enter your email" required value="{{ messageForm.email.value|default_if_none:'' }}"/>
+                                        </div>
+                                        <div class="input-box message-box">
+                                            <textarea placeholder="Enter your message" name="message" required>{{ messageForm.message.value|default_if_none:'' }}</textarea>
+                                        </div>
+                                        <input type="submit" value="Send Now" />
+                                    </form>
+                                    </div>
+                                </div>
+                    </section>
+
+            <!-- Newsletter Section -->
+                    <section class="section newsletter">
+                        <div class="newletter-container container">
+                            <a href="#" class="logo-content flex">
+                                    <!-- <i class='bx bx-coffee logo-icon'></i> -->
+                                    <span class="logo-text">Newsletter</span>
+                                </a>
+
+                                <p class="section-description">This is the perfect place to find a nice and cozy spot to sip some. You'll find the Java Jungle, Coffee Bean and more shops right in this website.</p>
+
+                                <form action="">
+                                    <div class="newsletter-inputBox">
+                                        <input type="email" name="email" placeholder="email@example.com" class="newsletter-input" required>
+                                        <button type="submit" class="button newsletter-button">Subscribe</button>
+                                    </div>
+                                </form>
+                                
+                                <!-- <div class="newsletter media-icons flex">
+                                    <a href="https://www.facebook.com"><i class='bx bxl-facebook'></i></a>
+                                    <a href="https://twitter.com/i/flow/login"><i class='bx bxl-twitter' ></i></a>
+                                    <a href="https://www.instagram.com/accounts/login"><i class='bx bxl-instagram-alt' ></i></a>
+                                    <a href="https://github.com/login"><i class='bx bxl-github'></i></a>
+                                    <a href="https://www.youtube.com/login"><i class='bx bxl-youtube'></i></a>
+                            </div> -->
+                        </div>
+                    </section>
+           
+
+            <!-- ============================================================== -->
+            <!-- End Page content -->
+            <!-- ============================================================== -->
+
+
+            <script>
+                document.addEventListener('DOMContentLoaded', () => {
+                const accordionButtons = document.querySelectorAll('.accordion-button');
+
+                accordionButtons.forEach(button => {
+                        button.addEventListener('click', () => {
+                        const targetId = button.getAttribute('data-target');
+                        const targetElement = document.querySelector(targetId);
+                        const accordionItem = button.closest('.accordion-item');
+
+                        // Close all other accordion items
+                        document.querySelectorAll('.accordion-item').forEach(item => {
+                                if (item !== accordionItem) {
+                                item.classList.remove('active');
+                                item.querySelector('.accordion-collapse').style.maxHeight = null;
+                                }
+                        });
+
+                        // Toggle the current accordion item
+                        if (accordionItem.classList.contains('active')) {
+                                accordionItem.classList.remove('active');
+                                targetElement.style.maxHeight = null;
+                        } else {
+                                accordionItem.classList.add('active');
+                                targetElement.style.maxHeight = targetElement.scrollHeight + 'px';
+                        }
+                        });
+                });
+                });
+
+
+            </script>
+
+
+{% endblock %}
+

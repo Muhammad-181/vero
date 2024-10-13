@@ -1,0 +1,78 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+
+{% block title %}
+ Legislative -
+{% endblock %}
+
+
+
+{% block content %}
+            <!-- ============================================================== -->
+            <!-- Start Page Content here -->
+            <!-- ============================================================== -->
+            <!-- Home Section -->
+            
+             
+                    <section class="council" id="council">
+                            <div class="council-head">
+                                    <div class="text">
+                                        Legislative
+                                    </div>
+                            </div>
+                    </section>
+
+
+                    <!-- BLOG Section -->
+            <section class="section council-list" id="council-list">
+                <div class="council-container container">
+                <div class="council-text">
+                    
+                </div>
+            
+                <div class="council-content">
+                    
+                        {% for obj in senators %}
+                                <div class="column">
+                                        <div class="content">
+                                                <div class="heading">
+                                                        <img src="{{ obj.picture.url }}" alt="" class="resize-image">
+                                                </div>
+                                                <div class="body">
+                                                        
+                                                        <div class="body-head">
+                                                                {{ obj.name}}
+                                                        </div>
+                                                        <div class="body-text">
+                                                                <p>{{ obj.position }}</p>
+                                                        </div>
+                                                        <div class="social-media">
+                                                         <a href="{{ obj.facebook_link }}" target="_blank" class="social-link">
+                                                                <i class='bx bxl-facebook'></i>
+                                                            </a>
+                                                        <a href="{{ obj.twitter_link }}" target="_blank" class="social-link">
+                                                                <i class='bx bxl-twitter'></i>
+                                                        </a>
+                                                        <a href="{{ obj.instagram_link }}" target="_blank" class="social-link">
+                                                                <i class='bx bxl-instagram'></i>
+                                                        </a>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                        
+                                </div>
+                        {% endfor %}
+                </div>
+                </div>
+            </section>
+            
+               
+
+        <!-- ============================================================== -->
+        <!-- End Page content -->
+        <!-- ============================================================== -->
+
+
+{% endblock %}
+

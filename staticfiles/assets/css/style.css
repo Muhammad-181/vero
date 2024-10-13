@@ -1,0 +1,200 @@
+
+:root{
+/* Font Sizes & Family */
+/* if we set html's font size 62.5% then 1rem = 10px */
+
+--body-font: 'Poppins', sans-serif;
+
+--big-font: 4rem;
+--h1-font: 3.6rem;
+--h2-font: 2.4rem;
+--h3-font: 2rem;
+--h4-font: 1.8rem;
+--normal-font: 1.6rem;
+--small-font: 1.4rem;
+--smaller-font: 1.3rem;
+
+/* Font Weight ***/
+--font-regular: 400;
+--font-medium: 500;
+--font-semi-bold: 600;
+
+/* Color Variables */
+--primary-color: #016b4b;
+--primary-lightbg: rgba(1, 107, 75, 0.2);
+/* --primary-color-hover: #016b4b; */
+--text-color: #333;
+--text-color-light: #888682;
+--border-color: #484848;
+--white-color: #FFF;
+--section-bg: #016b4b;
+--primary-color-hover: #014f38;
+
+/* z-index */
+--z-overlay: 10;
+--z-fixed: 100;
+
+/* transition */
+--tran-0-2: 0.2s;
+--tran-0-3: 0.3s;
+--tran-0-5: 0.5s;
+}
+
+/*Font sizes For Small Screen 968px */
+@media screen and (max-width: 990px) {
+:root {
+  --big-font: 3.5rem;
+  --h1-font: 2.4rem;
+  --h2-font: 2rem;
+  --h3-font: 1.8rem;
+  --h4-font: 1.6rem;
+  --normal-font: 1.5rem;
+  --small-font: 1.3rem;
+  --smaller-font: 1.2rem;
+}
+}
+.text-red{
+    color: red;
+}
+.whiteText{
+    color: var(--white-color);
+}
+
+
+
+.bgPrimary{
+    background-color: #016b4b !important;
+}
+
+.nonBtn:hover{
+    background-color: #689687 !important;
+}
+
+
+.profileItemlist{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1.5px solid #000;
+}
+
+
+.profileHead{
+    font-size: 18px;
+}
+
+
+.profileBody{
+    font-size: 15px;
+}
+
+.profileItemlist span{
+    background-color:#016b4b !important;
+    color: #fff;
+    border-radius: 1rem;
+}
+
+.profileItemlist span a{
+    font-size: 18px;
+}
+
+.profileItemlist .no-border {
+    border-bottom: none;
+}
+
+
+
+/* ------------------------------------------------------------------------ */
+
+/* UPDATE PROFILE INFO */
+
+/* -------------------------------------------------------------------------- */
+
+.resetpassBg {
+    display: flex;
+    justify-content: center; /* Horizontal centering */
+    align-items: center; /* Vertical centering */
+    height: 100vh; /* Full viewport height */
+}
+
+/* ------------------------------------------------------------------------ */
+
+/* COURSES */
+
+/* -------------------------------------------------------------------------- */
+
+.no-corses p{
+    font-size: var(--font-medium);
+    font-weight: var(--font-semi-bold);
+    color: var(--primary-color);
+}
+
+.course-form .form-group {
+    margin-bottom: 15px;
+}
+
+.course-form form {
+    margin: auto;
+}
+
+.course-form .form-group {
+    margin-bottom: 15px;
+}
+
+.course-form .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.course-form .form-group select {
+    width: 100%;
+    padding: 10px;
+    font-size: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+.course-form .form-group select:focus {
+    border-color: var(--primary-color);
+    outline: none;
+}
+
+/* Default styles for small screens */
+.course-form .form-row {
+    display: block;
+}
+
+.course-form .form-row > div {
+    margin-bottom: 15px;
+}
+
+/* Styles for larger screens */
+@media (min-width: 768px) {
+    .course-form .form-group select {
+        padding: 10px;
+        font-size: 16px;
+       
+    }
+
+    .course-form form {
+        padding: 20px;
+    }
+
+    .course-form .form-row {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .course-form .form-row > div {
+        flex: 1;
+        margin-right: 15px;
+    }
+
+    .course-form .form-row > div:last-child {
+        margin-right: 0;
+    }
+}

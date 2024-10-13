@@ -1,0 +1,75 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+
+{% block title %}
+ Events -
+{% endblock %}
+
+
+
+{% block content %}
+            <!-- ============================================================== -->
+            <!-- Start Page Content here -->
+            <!-- ============================================================== -->
+            <!-- Home Section -->
+            
+             
+                    <section class="council" id="council">
+                            <div class="council-head">
+                                    <div class="text">
+                                        Events
+                                    </div>
+                            </div>
+                    </section>
+
+
+                    <!-- BLOG Section -->
+                    <section class="section post" id="post">
+                        <div class="post-container container">
+                        
+                            <div class="post-content">
+                                {% for obj in events %}
+                                    <div class="column">
+                                            <div class="content">
+                                                    <div class="heading">
+                                                            <img src="{{ obj.image.url }}" alt="" class="resize-image">
+                                                    </div>
+                                                    <div class="body">
+                                                            
+                                                            <div class="authordate">
+                                                                    <div class="author">
+                                                                            {{ obj.author.username }}
+                                                                    </div>
+                                                                    <div class="date">
+                                                                            {{ obj.event_date }}
+                                                                    </div>
+                                                            </div>
+                                                            <div class="body-head text-center">
+                                                                {{ obj.title }}
+                                                            </div>
+                                                            <div class="body-text">
+                                                                    <p>{{ obj.body|slice:100 }}....</p>
+                                                            </div>
+                                                            <button class=" read-more"><a href="{% url 'app:event_detail' obj.uid %}">Read more >>></a></button>
+                                                            <!-- <button class=" read-more"><a href="{% url 'app:event_detail' uid=obj.uid %}">Read more</a></button> -->
+                                                    </div>
+                                            </div>
+                                            
+                                    </div>
+                                {% endfor %}
+                                
+                                
+                            </div>
+                        </div>
+                    </section>
+            
+               
+
+        <!-- ============================================================== -->
+        <!-- End Page content -->
+        <!-- ============================================================== -->
+
+
+{% endblock %}
+

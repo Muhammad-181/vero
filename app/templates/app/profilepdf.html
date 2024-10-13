@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Profile</title>
+    <style>
+        /* General Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            padding: 20px;
+        }
+
+        /* School Header */
+        .school-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 4px solid #2C3E50;
+        }
+
+        .school-header h1 {
+            font-size: 2.8rem;
+            color: #2C3E50;
+            text-transform: uppercase;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .school-header p {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            color: #7F8C8D;
+        }
+
+        .school-logo {
+            width: 100px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        /* Remove underlines from text globally */
+        a, h1, h2, h3, p, span {
+            text-decoration: none;
+        }
+
+        /* Profile Container */
+        .profile-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .profile-header h2 {
+            font-size: 2rem;
+            color: #2C3E50;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .profile-picture {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #2C3E50;
+        }
+
+        /* Profile Details */
+        .profile-details {
+            margin-top: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .profile-details h3 {
+            grid-column: 1 / -1;
+            font-size: 1.6rem;
+            color: #34495E;
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        .profile-details p {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .profile-details .field {
+            font-weight: bold;
+            color: #2C3E50;
+        }
+
+        .print-button {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .print-button button {
+            background-color: #2C3E50;
+            color: white;
+            padding: 12px 25px;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .print-button button:hover {
+            background-color: #34495E;
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .profile-details {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-picture {
+                margin-top: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="school-header">
+    <img src="{% static 'school_logo.png' %}" alt="School Logo" class="school-logo">
+    <h1>Computer Science Department</h1>
+    <p>Nasasra State University, Keffi</p>
+    <p>Email: Computerscience@example.com | Phone: (123) 456-7890</p>
+</div>
+
+<div class="profile-container">
+    <div class="profile-header">
+        <div>
+            <h2>Student Profile Information</h2>
+            <p><strong>Matric No:</strong> {{ student.user.username }}</p>
+            <p><strong>Full Name:</strong> {{ student.first_name }} {{ student.other_names }} {{ student.last_name }}</p>
+        </div>
+        <div>
+            {% if student.profile_picture %}
+            <img src="{{ student.profile_picture.url }}" alt="Profile Picture" class="profile-picture">
+            {% else %}
+            <img src="{% static 'default_profile_picture.jpg' %}" alt="Default Profile Picture" class="profile-picture">
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="profile-details">
+        <h3>Personal Information</h3>
+        <p><span class="field">Admission Year:</span> {{ student.admission_year }}</p>
+        <p><span class="field">Department:</span> {{ student.department }}</p>
+        <p><span class="field">Faculty:</span> {{ student.faculty }}</p>
+        <p><span class="field">Phone Number:</span> {{ student.phone_number }}</p>
+        <p><span class="field">State:</span> {{ student.state }}</p>
+        <p><span class="field">Nationality:</span> {{ student.nationality }}</p>
+        <p><span class="field">Gender:</span> {{ student.get_Gender_display }}</p>
+        <p><span class="field">Institutional Email:</span> {{ student.inst_email }}</p>
+     
+    </div>
+
+    <div class="print-button">
+        <span>{{ today|date:"D d M Y" }}  </span>
+    </div>
+</div>
+
+</body>
+</html>

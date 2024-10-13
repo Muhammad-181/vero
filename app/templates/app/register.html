@@ -1,0 +1,179 @@
+<!-- ">Student Registration</h2>
+        <form method="POST">
+            {% csrf_token %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+            <div class="mb-3">
+                {{ form.matric.label_tag }}
+                {{ form.matric }}
+            </div>
+            <div class="mb-3">
+                {{ form.email.label_tag }}
+                {{ form.email }}
+            </div>
+            <div class="mb-3 position-relative">
+                {{ form.password1.label_tag }}
+                {{ form.password1 }}
+                <i class="bx bx-show eye-icon" id="togglePassword1"></i>
+            </div>
+            <div class="mb-3 position-relative">
+                {{ form.password2.label_tag }}
+                {{ form.password2 }}
+                <i class="bx bx-show eye-icon" id="togglePassword2"></i>
+            </div>
+            <div class="d-grid">
+                <button type="submit" class="btn btn-primary btn-block">Register</button>
+            </div>
+        </form>
+        <div class="text-center mt-3">
+            Already have an account? <a href="{% url 'students:login_user' %}">Login</a>
+        </div>
+    </div> -->
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Student Login</title>
+        {% load static %}
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+        <style>
+            /* Background and layout */
+            body {
+                background-image: url("{% static 'assets/images/students.jpg' %}");
+                background-size: cover;
+                background-position: center;
+                height: 100vh;
+                margin: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 0 20px;
+            }
+    
+            /* Glassmorphism effect */
+            .glass-card {
+                background: rgba(255, 255, 255, 0.01);
+                border-radius: 10px;
+                box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(8px);
+                border: 1px solid rgba(255, 255, 255, 0.3);
+                padding: 30px;
+                max-width: 400px;
+                width: 100%;
+                color: white;
+                transition: all 0.3s ease;
+            }
+    
+            .glass-card h2 {
+                text-align: center;
+                margin-bottom: 30px;
+                font-size: 2rem;
+            }
+    
+            /* Form inputs */
+            .form-control {
+                background: rgba(255, 255, 255, 0.2);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                color: white;
+            }
+    
+            .form-control::placeholder {
+                color: rgba(255, 255, 255, 0.7);
+            }
+    
+            /* Button */
+            .btn-primary {
+                background-color: rgba(0, 123, 255, 0.8);
+                border: none;
+            }
+    
+            .btn-primary:hover {
+                background-color: rgba(0, 123, 255, 1);
+            }
+    
+            /* Centered text links */
+            .text-center a {
+                color: rgba(255, 255, 255, 0.7);
+            }
+    
+            .text-center a:hover {
+                color: white;
+            }
+    
+            /* Responsive Design */
+            @media (max-width: 768px) {
+                body {
+                    padding: 0 10px;
+                }
+    
+                .glass-card {
+                    padding: 20px;
+                    max-width: 90%;
+                }
+    
+                .glass-card h2 {
+                    font-size: 1.5rem;
+                    margin-bottom: 20px;
+                }
+            }
+    
+            @media (max-width: 576px) {
+                .glass-card {
+                    padding: 15px;
+                    max-width: 100%;
+                }
+    
+                .glass-card h2 {
+                    font-size: 1.3rem;
+                    margin-bottom: 15px;
+                }
+    
+                .btn-primary {
+                    font-size: 0.9rem;
+                    padding: 10px;
+                }
+    
+                .text-center {
+                    font-size: 0.9rem;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="glass-card">
+            <h2>Register</h2>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="mb-3">
+                    {{ form.matric.label_tag }}
+                    {{ form.matric }}
+                </div>
+                <div class="mb-3">
+                    {{ form.email.label_tag }}
+                {{ form.email }}
+                </div>
+                <div class="mb-3">
+                    {{ form.password1.label_tag }}
+                    {{ form.password1 }}
+                </div>
+                <div class="mb-3">
+                    {{ form.password2.label_tag }}
+                {{ form.password2 }}
+                <br>
+                <div class="d-grid" style="margin-bottom: 2rem;">
+                    <button type="submit" class="btn btn-primary btn-block">Register</button>
+                </div>
+            </form>
+            <div class="text-center mt-3">
+                <a href="{% url 'students:login_user' %}">Login</a> | <a href="{% url 'students:forget_password' %}">Forgot Password</a>
+            </div>
+        </div>
+    </body>
+    </html>
+    

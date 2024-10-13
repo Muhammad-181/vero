@@ -1,0 +1,176 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+
+{% block title %}
+{{ request.user.username }}
+{% endblock %}
+
+
+
+{% block content %}
+           
+            <!-- ============================================================== -->
+            <!-- Start Page Content here -->
+            <!-- ============================================================== -->
+       
+            <div class="content-page">
+              <div class="content">
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="page-title-box">
+                        <div class="page-title-right">
+                          <ol class="breadcrumb m-0">
+                            <li class="breadcrumb-item"><a href="javascript: void(0);">Dashboard</a></li>
+                            <li class="breadcrumb-item active">Profile</li>
+                          </ol>
+                        </div>
+                        <h4 class="page-title">Update information</h4>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-4 col-xl-4">
+                      <div class="d-flex flex-column align-items-center text-center p-3">
+                        {% if profile.profile_picture %}
+                        <img src="{{ profile.profile_picture.url }}" alt="dpic" class="rounded-circle" width="150px" style="border: 5px solid #016b4b;">
+                        {% else %}
+                        <img src="{% static 'assets/images/anondp.jpg' %}" alt="dpic" class="rounded-circle" width="150px" style="border: 5px solid #016b4b;">
+                        {% endif %}
+            
+                        <form action="{% url 'students:reset-image' %}" method="POST" enctype="multipart/form-data">
+                          {% csrf_token %}
+                          <div class="form-group">
+                            <label for="useremail" class="font-weight-bold">Change Profile Picture {{ profile.last_name }}</label>
+                            {{ pic_form.profile_picture }}
+                            <button type="submit" class="btn bgPrimary nonBtn waves-effect waves-light mt-2"><i class='bx bx-save'></i></i> Update</button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+            
+                    <div class="col-lg-8 col-xl-8">
+                      <div class="card-box">
+                        <form action="" method="POST" id="profile-form">
+                          {% csrf_token %}
+                          <div class="row mt-3">
+                            <div class="col-md-12 mb-2">
+                              <label class="labels">First Name</label>
+                              <input type="text" class="form-control" name="first_name" value="{{ profile.first_name }}">
+                            </div>
+                            <div class="col-md-12 mb-2">
+                              <label class="labels">Last Name</label>
+                              <input type="text" class="form-control" name="last_name" value="{{ profile.last_name }}">
+                            </div>
+                            <div class="col-md-12 mb-2">
+                              <label class="labels">Other Names</label>
+                              <input type="text" class="form-control" name="other_names" value="{{ profile.other_names }}">
+                            </div>
+                            <div class="col-md-12 mb-2">
+                              <label class="labels" for="id_faculty">Faculty</label>
+                              <select class="form-control" name="faculty" id="id_faculty">
+                                <option value="">Select Faculty</option>
+                                {% for faculty in faculties %}
+                                <option value="{{ faculty.id }}" {% if profile.faculty.id == faculty.id %}selected{% endif %}>{{ faculty.name }}</option>
+                                {% endfor %}
+                              </select>
+                            </div>
+                            <div class="col-md-12 mb-2">
+                              <label class="labels" for="id_department">Department</label>
+                              <select class="form-control" name="department" id="id_department">
+                                <option value="">Select Department</option>
+                                {% for department in departments %}
+                                <option value="{{ department.id }}" {% if profile.department.id == department.id %}selected{% endif %}>{{ department.name }}</option>
+                                {% endfor %}
+                              </select>
+                            </div>
+            
+                            <div class="col-md-12 mb-2">
+                              <label class="labels" for="id_admission_year">Admission Year</label>
+                              <select class="form-control" name="admission_year" id="id_admission_year">
+                                <option value="">Select Admission Year</option>
+                                {% for level in levels %}
+                                <option value="{{ level.id }}" {% if profile.admission_year == level %}selected{% endif %}>{{ level.admission_year }}</option>
+                                {% endfor %}
+                              </select>
+                            </div>
+                            <div class="col-md-12 mb-2">
+                              <label class="labels" for="id_Gender">Gender</label>
+                              <select class="form-control" name="Gender" id="id_Gender">
+                                <option value="">Select Gender</option>
+                                <option value="M" {% if profile.Gender == 'M' %}selected{% endif %}>Male</option>
+                                <option value="F" {% if profile.Gender == 'F' %}selected{% endif %}>Female</option> 
+                            
+                                <option value="O" {% if profile.Gender == 'O' %}selected{% endif %}>Other</option>
+                            
+                              </select>
+                            </div>
+                            <div class="col-md-12 mb-2">
+                              <label class="labels">State</label>
+                              <input type="text" class="form-control" name="state" value="{{ profile.state }}"> 
+                            </div>
+                            <div class="col-md-12 mb-2">
+                              <label class="labels">Nationality</label>
+                              <input type="text" class="form-control" name="nationality" value="{{ profile.nationality }}"> 
+                            </div>
+                            <div class="col-md-12 mb-2">
+                              <label class="labels">Phone Number</label>
+                              <input type="text" class="form-control" name="phone_number" value="{{ profile.phone_number }}">
+                            </div>
+                            <div class="col-md-12 mb-2">
+                              <label class="labels">Email</label>
+                              <input type="text" class="form-control" name="inst_email" value="{{ profile.user.email }}">
+                            </div>
+                          </div>
+                          <button type="submit" class="btn nonBtn bgPrimary waves-effect waves-light mt-2">
+                            <i class='bx bx-save'></i></i> Update
+                          </button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {% include "students/footer.html" %}
+            </div>
+            
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script>
+              $(document).ready(function() {
+                $("#id_faculty").change(function() {
+                  var facultyId = $(this).val();
+                  var departmentSelect = $("#id_department");
+                  departmentSelect.empty();
+                  if (facultyId) {
+                    $.ajax({
+                      url: "{% url 'students:get_departments' %}",
+                      data: {
+                        'faculty_id': facultyId
+                      },
+                      success: function(data) {
+                        departmentSelect.append('<option value="">Select Department</option>');
+                        $.each(data, function(key, value) {
+                          departmentSelect.append('<option value="' + key + '">' + value + '</option>');
+                        });
+                      }
+                    });
+                  } else {
+                    departmentSelect.append('<option value="">Select Department</option>');
+                  }
+                });
+              });
+            </script>
+       
+        <!-- ============================================================== -->
+        <!-- End Page content -->
+        <!-- ============================================================== -->
+
+
+       
+        <!-- ============================================================== -->
+        <!-- End Page content -->
+        <!-- ============================================================== -->
+
+
+{% endblock %}

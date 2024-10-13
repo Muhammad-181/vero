@@ -1,0 +1,52 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+
+{% block title %}
+{{obj.title }} - 
+{% endblock %}
+
+
+
+{% block content %}
+            <!-- ============================================================== -->
+            <!-- Start Page Content here -->
+            <!-- ============================================================== -->
+            <!-- Home Section -->
+                    <section class="council" id="council">
+                            <div class="council-head">
+                                    <div class="text">
+                                      {{ obj.title }}
+                                    </div>
+                            </div>
+                    </section>
+
+
+                    <!-- BLOG Section -->
+            <section class="section event-detail" id="event-detail">
+                <div class="event-detail-container container">
+                <div class="event-detail-text">
+                    
+                </div>
+            
+                <div class="event-detail-content">
+                    
+                       <img src="{{ obj.image.url }}" alt="event image">
+
+                       <p class="date">{{ obj.event_date}} | {{ obj.author }}</p>
+                       <div class="body">
+                            {{ obj.body }}
+                       </div>
+                    
+                </div>
+                </div>
+            </section>
+            
+          
+        <!-- ============================================================== -->
+        <!-- End Page content -->
+        <!-- ============================================================== -->
+
+
+{% endblock %}
+

@@ -1,0 +1,400 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    
+    <head>
+        <meta charset="utf-8" />
+        <title>{% block title %}{% endblock %} - COMPUTER SCIENCE</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="" name="description" />
+        <meta content="" name="MartDevelopers" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <!-- NOTIFY.JS FOR TOAST NOTIFICATION -->
+        <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css"> -->
+
+        <!-- App favicon -->
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+        <link rel="shortcut icon" href="{% static 'assets/images/nacosnobg.png' %}">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+        <!-- App css -->
+        <link href="{% static 'assets/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'assets/css/icons.min.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'assets/css/app.min.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'assets/css/style.css' %}" rel="stylesheet" type="text/css" />
+
+        <!--Load Sweet Alert Javascript-->
+        
+        
+
+
+
+    </head>
+
+    <body >
+
+        <!-- Begin page -->
+        <div id="wrapper">
+            <!-- Topbar Start -->
+            <div class="navbar-custom">
+                <ul class="list-unstyled topnav-menu float-right mb-0">
+        
+                    <li class="d-none d-sm-block">
+                        <!-- <form class="app-search">
+                            <div class="app-search-box">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Search...">
+                                    <div class="input-group-append">
+                                        <button class="btn" type="submit">
+                                            <i class="fe-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form> -->
+                    </li>
+        
+                    
+                    <li class="dropdown notification-list">
+                        <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                            {% if request.user.studentprofile.profile_picture %}
+                            <!-- If the profile picture exists, display it -->
+                            <img src="{{ request.user.studentprofile.profile_picture.url }}" alt="dpic" class="rounded-circle" width="150px">
+                            {% else %}
+                                <!-- If no profile picture, display the default image -->
+                                <img src="{% static 'assets/images/anondp.jpg' %}" alt="dpic" class="rounded-circle" width="150px">
+                            {% endif %}                            <span class="pro-user-name ml-1">
+                                {{ request.user.studentprofile.last_name }} <i class='bx bx-chevron-down' ></i> 
+                            </span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
+                            <!-- item-->
+                            <!-- <div class="dropdown-header noti-title">
+                                <h6 class="text-overflow m-0">Welcome !</h6>
+                            </div> -->
+        
+                            <!-- item-->
+                            <!-- <a href="his_doc_account.php" class="dropdown-item notify-item">
+                                <i class="fas fa-user"></i>
+                                <span>My Account</span>
+                            </a> -->
+        
+                            <!-- <a href="his_doc_update-account.php" class="dropdown-item notify-item">
+                                <i class="fas fa-user-tag"></i>
+                                <span>Update Account</span>
+                            </a>
+        
+        
+                            <div class="dropdown-divider"></div> -->
+        
+                            <!-- item-->
+                            <a href="{% url 'students:logout_user' %}" class="dropdown-item notify-item">
+                                <i class='bx bx-log-out bx-sm' style="color: red;"></i>
+                                <span>Logout</span>
+                            </a>
+        
+                        </div>
+                    </li>
+        
+                    
+        
+                </ul>
+        
+                <!-- LOGO -->
+                <div class="logo-box">
+                    <a href="{% url 'students:index' %}" class="logo text-center">
+                        <span class="logo-lg">
+                            <!-- <img src="assets/images/logo-light.png" alt="" height="18"> -->
+                            <span class="logo-lg-text-light">CMP - NSUK</span>
+                        </span>
+                        <span class="logo-sm">
+                            <span class="logo-sm-text-dark" style="color: #fff;">CMP</span>
+                            <!-- <img src="assets/images/logo-sm-white.png" alt="" height="24"> -->
+                        </span>
+                    </a>
+                </div>
+        
+                <ul class="list-unstyled topnav-menu topnav-menu-left m-0">
+                    <li>
+                        <button class="button-menu-mobile waves-effect waves-light">
+                            <!-- <i class="fe-menu"></i> -->
+                            <i class='bx bx-menu'></i>
+                        </button>
+                    </li>
+        
+                    <!-- <li class="dropdown d-none d-lg-block"> -->
+                        <!-- <a class="nav-link dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                            Create New
+                            <i class="mdi mdi-chevron-down"></i> 
+                        </a> -->
+                        <!-- <div class="dropdown-menu">
+                            
+        
+                            <a href="his_doc_register_patient.php" class="dropdown-item">
+                                <i class="fe-activity mr-1"></i>
+                                <span>Patient</span>
+                            </a>
+        
+        
+        
+                            <a href="his_doc_lab_report.php" class="dropdown-item">
+                                <i class="fe-hard-drive mr-1"></i>
+                                <span>Laboratory Report</span>
+                            </a>
+        
+                            
+                            <div class="dropdown-divider"></div>
+        
+                            
+                        </div> -->
+                    <!-- </li>
+         -->
+                </ul>
+            </div>
+            <!-- end Topbar -->
+
+            <!-- ========== Left Sidebar Start ========== -->
+            <div class="left-side-menu">
+
+                <div class="slimscroll-menu">
+
+                    <!--- Sidemenu -->
+                    <div id="sidebar-menu">
+
+                        <ul class="metismenu" id="side-menu">
+
+                            <li class="menu-title">Navigation</li>
+
+                            <li>
+                                <a href="{% url 'students:index' %}">
+                                    <i class='bx bxs-dashboard'></i>
+                                    <span> Dashboard </span>
+                                </a>
+                                
+                            </li>
+
+                            
+
+                            <li>
+                                <a href="{% url 'payments:initialize_payment' %}">
+                                    <i class='bx bx-wallet'></i>
+                                    <span> Payments </span>
+                                </a>
+                                
+                            </li>
+
+                            <li>
+                                <a href="{% url 'students:reset-info' %}">
+                                    <i class='bx bxs-user-account'></i>
+                                    <span> Update info </span>
+                                </a>
+                                
+                            </li>
+
+                            <li>
+                                <a href="{% url 'students:change-password' %}">
+                                    <i class='bx bx-lock'></i>
+                                    <span> Update password </span>
+                                </a>
+                                
+                            </li>
+
+                           
+                            <li>
+                                <a href="{% url 'students:logout_user' %}">
+                                    <i class='bx bx-log-out bx-sm' style="color: red;"></i>
+                                    <span > Logout </span>
+                                </a>
+                                
+                            </li>
+
+                            <!-- <li>
+                                <a href="javascript: void(0);">
+                                    <i class="fab fa-accessible-icon "></i>
+                                    <span> Patients </span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <ul class="nav-second-level" aria-expanded="false">
+                                    <li>
+                                        <a href="his_doc_register_patient.php">Register Patient</a>
+                                    </li>
+                                    <li>
+                                        <a href="his_doc_view_patients.php">View Patients</a>
+                                    </li>
+                                    <li>
+                                        <a href="his_doc_manage_patient.php">Manage Patients</a>
+                                    </li>
+                                    <hr>
+                                    <li>
+                                        <a href="his_doc_discharge_patient.php">Discharge Patients</a>
+                                    </li>
+                                    <li>
+                                        <a href="his_doc_patient_transfer.php">Patient Transfers</a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            
+
+                            <li>
+                                <a href="javascript: void(0);">
+                                    <i class="mdi mdi-pill"></i>
+                                    <span> Pharmacy </span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <ul class="nav-second-level" aria-expanded="false">
+                                    <li>
+                                        <a href="his_doc_add_pharm_cat.php">Add Pharm Category</a>
+                                    </li>
+                                    <li>
+                                        <a href="his_doc_view_pharm_cat.php">View Pharm Category</a>
+                                    </li>
+                                    <li>
+                                        <a href="his_doc_manage_pharm_cat.php">Manage Pharm Category</a>
+                                    </li>
+                                    <hr>
+                                    <li>
+                                        <a href="his_doc_add_pharmaceuticals.php">Add Pharmaceuticals</a>
+                                    </li>
+                                    <li>
+                                        <a href="his_doc_view_pharmaceuticals.php">View Pharmaceuticals</a>
+                                    </li>
+                                    <li>
+                                        <a href="his_doc_manage_pharmaceuticals.php">Manage Pharmaceuticals</a>
+                                    </li>
+                                    <hr>
+                                    <li>
+                                        <a href="his_doc_add_presc.php">Add Prescriptions</a>
+                                    </li>
+                                    <li>
+                                        <a href="his_doc_view_presc.php">View Prescriptions</a>
+                                    </li>
+                                    <li>
+                                        <a href="his_doc_manage_presc.php">Manage Prescriptions</a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            
+                            <li>
+                                <a href="javascript: void(0);">
+                                    <i class=" fas fa-funnel-dollar "></i>
+                                    <span> Inventory </span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <ul class="nav-second-level" aria-expanded="false">
+                                    
+                                    <li>
+                                        <a href="his_doc_pharm_inventory.php">Pharmaceuticals</a>
+                                    </li>
+
+                                    <li>
+                                        <a href="his_doc_equipments_inventory.php">Assets</a>
+                                    </li>
+                                    
+                                </ul>
+                            </li>
+                
+                            <li>
+                                <a href="javascript: void(0);">
+                                    <i class="mdi mdi-flask"></i>
+                                    <span> Laboratory </span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <ul class="nav-second-level" aria-expanded="false">
+                                    <li>
+                                        <a href="his_doc_patient_lab_test.php">Patient Lab Tests</a>
+                                    </li>
+                                    <li>
+                                        <a href="his_doc_patient_lab_result.php">Patient Lab Results</a>
+                                    </li>
+                                    <li>
+                                        <a href="his_doc_patient_lab_vitals.php">Patient Vitals</a>
+                                    </li>
+                                    
+                                    <li>
+                                        <a href="his_doc_lab_report.php">Lab Reports</a>
+                                    </li>
+                                    <hr>
+                                    
+                                </ul>
+                            </li>
+
+                            <li>
+                                <a href="javascript: void(0);">
+                                    <i class="mdi mdi-cash-refund "></i>
+                                    <span> Payrolls </span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <ul class="nav-second-level" aria-expanded="false">
+                                    
+                                    <li>
+                                        <a href="his_doc_view_payrolls.php">My Payrolls</a>
+                                    </li>
+                                </ul>
+                            </li> -->
+
+                            
+
+                        </ul>
+
+                    </div>
+                    <!-- End Sidebar -->
+
+                    <div class="clearfix"></div>
+
+                </div>
+                <!-- Sidebar -left -->
+
+            </div>
+            <!-- Left Sidebar End -->
+
+                {% block content %}
+                <!-- ============================================================== -->
+                <!-- Start Page Content here -->
+                <!-- ============================================================== -->
+        
+                
+                <!-- ============================================================== -->
+                <!-- End Page content -->
+                <!-- ============================================================== -->
+
+
+                {% endblock %}
+            
+        </div>
+        <!-- END wrapper -->
+
+        <!-- Right bar overlay-->
+        <div class="rightbar-overlay"></div>
+
+
+    <!-- Vendor js -->
+    <script src="{% static 'assets/js/vendor.min.js' %}"></script>
+
+    <!-- App js -->
+    <script src="{% static 'assets/js/app.min.js' %}"></script>
+    <!-- NOTIFY.JS SCRIPT -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/notify.js/2.0.0/notify.js" 
+    integrity="sha512-5i8WZpj1KyBZdb4G/qae5tjnfDsENLR6hPzA7sBS7kG+9wvbhq3EQ9u487QcXPETLdzgp6j5n5qiFGeBAX4HhQ==" 
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js" 
+    integrity="sha512-efUTj3HdSPwWJ9gjfGR71X9cvsrthIA78/Fvd/IN+fttQVy7XWkOAXb295j8B3cmm/kFKVxjiNYzKw9IQJHIuQ==" 
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+       <script>
+           $(document).ready(function() {
+               {% if messages %}
+                   {% for message in messages %}
+                       $.notify("{{ message }}", "{{ message.tags }}");
+                   {% endfor %}
+               {% endif %}
+           });
+       </script>
+    
+</body>
+
+</html>
+

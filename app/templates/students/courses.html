@@ -1,0 +1,390 @@
+
+{% extends 'app/base.html' %}
+{% load static %}
+
+
+{% block title %}
+Courses
+{% endblock %}
+
+
+
+{% block content %}
+            <!-- ============================================================== -->
+            <!-- Start Page Content here -->
+            <!-- ============================================================== -->
+           
+            <div class="content-page">
+                <div class="content">
+            
+                    <!-- Start Content-->
+                    <div class="container-fluid">
+                        
+                        <!-- start page title -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box">
+                                    
+                                    <h4 class="page-title">Courses</h4>
+                                </div>
+                            </div>
+                        </div>     
+                        <!-- end page title --> 
+            
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card-box">
+                                    <!-- <div class="col-md-12 mb-2">
+                                        <label class="labels">First Name</label>
+                                        {{ form.as_p }}
+                                    </div> -->
+
+                                    
+
+
+                                    <h4 class="header-title"></h4>
+                                    <div class="mb-2">
+                                        <div class="row">
+                                            <div class="col-12 text-sm-center form-inline course-form" >
+                                                
+                                                <form id="courseForm">
+                                                    <div class="form-row">
+                                                        <div class="form-group">
+                                                            <!-- <label for="department">Department:</label> -->
+                                                            <select id="department" name="department">
+                                                                <option value="">Department</option>
+                                                                {% for department in departments %}
+                                                                    <option value="{{ department.id }}">{{ department.name }}</option>
+                                                                {% endfor %}
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <!-- <label for="level">Level:</label> -->
+                                                            <select id="level" name="level">
+                                                                <option value="">Level</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <!-- <label for="semester">Semester:</label> -->
+                                                            <select id="semester" name="semester">
+                                                                <option value="">Semester</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="table-responsive">
+                                        <div class="no-corses section">
+                                            <p id="noCoursesMessage">No courses available!</p>
+                                        </div>
+                                        <table id="demo-foo-filtering" class="table table-bordered toggle-circle mb-0" data-page-size="7" style="display:none;">
+                                            <thead>
+                                            <tr>
+                                                <th>Course Code</th>
+                                                <th data-toggle="true">Course Title</th>
+                                                <!-- <th data-hide="phone">Amount</th> -->
+                                                <th data-hide="phone">Credit Unit</th>
+                                                <th data-hide="phone">Note</th>
+                                                <th data-hide="phone">Past Questions</th>
+                                               
+                                            </tr>
+                                            </thead>
+                                           
+            
+                                            <tbody style="color: #016b4b;">
+                                                
+                                            </tbody>
+                                            <tfoot>
+                                                <tr class="active">
+                                                    <td colspan="8" class="footable-visible">
+                                                        <div class="text-right">
+                                                            <ul class="pagination pagination-rounded justify-content-end footable-pagination m-t-10 mb-0">
+                                                                <li class="footable-page-arrow disabled">
+                                                                    <a data-page="first" href="#first">«</a>
+                                                                </li>
+                                                                <li class="footable-page-arrow disabled">
+                                                                    <a data-page="prev" href="#prev">‹</a>
+                                                                </li>
+                                                                <li class="footable-page active">
+                                                                <a data-page="0" href="#">1</a>
+                                                                </li>
+                                                                <li class="footable-page-arrow disabled">
+                                                                <a data-page="next" href="#next">›</a>
+                                                                </li>
+                                                                <li class="footable-page-arrow disabled">
+                                                                <a data-page="last" href="#last">»</a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                </tfoot>
+                                        </table>
+                                        
+                                    </div> <!-- end .table-responsive-->
+                                </div> <!-- end card-box -->
+                            </div> <!-- end col -->
+                        </div>
+                        <!-- end row -->
+            
+                    </div> <!-- container -->
+            
+                </div> <!-- content -->
+            
+                <!-- Footer Start -->
+                {% include "students/footer.html" %}
+                                <!-- end Footer -->
+            
+            </div>
+
+
+
+            <!-- <script>
+                $(document).ready(function() {
+                    $('#department').change(function() {
+                        var departmentId = $(this).val();
+                        if (departmentId) {
+                            $.ajax({
+                                url: '{% url "students:get_levels" %}',
+                                data: {'department_id': departmentId},
+                                success: function(data) {
+                                    $('#level').empty();
+                                    $('#level').append('<option value="">Select Level</option>');
+                                    $.each(data, function(key, value) {
+                                        $('#level').append('<option value="' + value.id + '">' + value.name + '</option>');
+                                    });
+                                    $('#semester').empty();
+                                    $('#semester').append('<option value="">Select Semester</option>');
+                                    $('#courseTable').hide();
+                                    $('#noCoursesMessage').hide();
+                                }
+                            });
+                        } else {
+                            $('#level').empty();
+                            $('#level').append('<option value="">Select Level</option>');
+                            $('#semester').empty();
+                            $('#semester').append('<option value="">Select Semester</option>');
+                            $('#courseTable').hide();
+                            $('#noCoursesMessage').hide();
+                        }
+                    });
+        
+                    $('#level').change(function() {
+                        var departmentId = $('#department').val();
+                        var levelId = $(this).val();
+                        if (levelId) {
+                            $.ajax({
+                                url: '{% url "students:get_semesters" %}',
+                                data: {
+                                    'department_id': departmentId,
+                                    'level_id': levelId
+                                },
+                                success: function(data) {
+                                    $('#semester').empty();
+                                    $('#semester').append('<option value="">Select Semester</option>');
+                                    $.each(data, function(key, value) {
+                                        $('#semester').append('<option value="' + value.id + '">' + value.name + '</option>');
+                                    });
+                                    $('#courseTable').hide();
+                                    $('#noCoursesMessage').hide();
+                                }
+                            });
+                        } else {
+                            $('#semester').empty();
+                            $('#semester').append('<option value="">Select Semester</option>');
+                            $('#courseTable').hide();
+                            $('#noCoursesMessage').hide();
+                        }
+                    });
+        
+                    $('#semester').change(function() {
+                        var departmentId = $('#department').val();
+                        var levelId = $('#level').val();
+                        var semesterId = $(this).val();
+                        if (semesterId) {
+                            $.ajax({
+                                url: '{% url "students:get_course_codes" %}',
+                                data: {
+                                    'department_id': departmentId,
+                                    'level_id': levelId,
+                                    'semester_id': semesterId
+                                },
+                                success: function(data) {
+                                    var $table = $('#demo-foo-filtering');
+                                    var $tbody = $table.find('tbody');
+                                    $tbody.empty();
+                                    if (data.length > 0) {
+                                        $table.show();
+                                        $('#noCoursesMessage').hide();
+                                        $.each(data, function(key, value) {
+                                            var row = '<tr><td>' + value.code + '</td><td>' + value.name + '</td><td>' + '3 units' + '</td><td>' + 'Download' + '</td><td>' + 'Download' + '</td></tr>';
+                                            $tbody.append(row);
+                                        });
+                                    } else {
+                                        $table.hide();
+                                        $('#noCoursesMessage').show();
+                                    }
+                                }
+                            });
+                        } else {
+                            $('#demo-foo-filtering').hide();
+                            $('#noCoursesMessage').hide();
+                        }
+                    });
+                });
+            </script> -->
+
+            <script>
+                $(document).ready(function() {
+                    $('#department').change(function() {
+                        var departmentId = $(this).val();
+                        if (departmentId) {
+                            $('#level').empty().append('<option value="">Loading...</option>');
+                            setTimeout(function() {
+                                $.ajax({
+                                    url: '{% url "students:get_levels" %}',
+                                    data: {'department_id': departmentId},
+                                    success: function(data) {
+                                        $('#level').empty();
+                                        $('#level').append('<option value="">Select Level</option>');
+                                        $.each(data, function(key, value) {
+                                            $('#level').append('<option value="' + value.id + '">' + value.name + '</option>');
+                                        });
+                                        $('#semester').empty();
+                                        $('#semester').append('<option value="">Select Semester</option>');
+                                        $('#courseTable').hide();
+                                        $('#noCoursesMessage').hide();
+                                    }
+                                });
+                            }, 500); // Add a delay of 500ms
+                        } else {
+                            $('#level').empty().append('<option value="">Select Level</option>');
+                            $('#semester').empty().append('<option value="">Select Semester</option>');
+                            $('#courseTable').hide();
+                            $('#noCoursesMessage').hide();
+                        }
+                    });
+        
+                    $('#level').change(function() {
+                        var departmentId = $('#department').val();
+                        var levelId = $(this).val();
+                        if (levelId) {
+                            $('#semester').empty().append('<option value="">Loading...</option>');
+                            setTimeout(function() {
+                                $.ajax({
+                                    url: '{% url "students:get_semesters" %}',
+                                    data: {
+                                        'department_id': departmentId,
+                                        'level_id': levelId
+                                    },
+                                    success: function(data) {
+                                        $('#semester').empty();
+                                        $('#semester').append('<option value="">Select Semester</option>');
+                                        $.each(data, function(key, value) {
+                                            $('#semester').append('<option value="' + value.id + '">' + value.name + '</option>');
+                                        });
+                                        $('#courseTable').hide();
+                                        $('#noCoursesMessage').hide();
+                                    }
+                                });
+                            }, 500); // Add a delay of 500ms
+                        } else {
+                            $('#semester').empty().append('<option value="">Select Semester</option>');
+                            $('#courseTable').hide();
+                            $('#noCoursesMessage').hide();
+                        }
+                    });
+        
+                    $('#semester').change(function() {
+                        var departmentId = $('#department').val();
+                        var levelId = $('#level').val();
+                        var semesterId = $(this).val();
+                        if (semesterId) {
+                            $('#courseTable').hide();
+                            $('#noCoursesMessage').hide();
+                            setTimeout(function() {
+                                $.ajax({
+                                    
+                            url: '{% url "students:get_course_codes" %}',
+                            data: {
+                                'department_id': departmentId,
+                                'level_id': levelId,
+                                'semester_id': semesterId
+                            },
+                            success: function(data) {
+                                var $table = $('#demo-foo-filtering');
+                                var $tbody = $table.find('tbody');
+                                $tbody.empty();
+                                if (data.length > 0) {
+                                    $table.show();
+                                    $('#noCoursesMessage').hide();
+                                    $.each(data, function(key, value) {
+                                        var materialsLink = value.materials_pdf ? '<a href="' + value.materials_pdf + '" download>Download</a>' : 'N/A';
+                                        var pastQuestionsLink = value.past_questions_pdf ? '<a href="' + value.past_questions_pdf + '" download>Download</a>' : 'N/A';
+                                        var row = '<tr><td>' + value.code + '</td><td>' + value.name + '</td><td>3 units</td><td>' + materialsLink + '</td><td>' + pastQuestionsLink + '</td></tr>';
+                                        $tbody.append(row);
+                                    });
+                                } else {
+                                    $table.hide();
+                                    $('#noCoursesMessage').show();
+                                }
+                            }
+                        });
+                    }, 500); // Add a delay of 500ms
+                } else {
+                    $('#demo-foo-filtering').hide();
+                    $('#noCoursesMessage').hide();
+                }
+            });
+        });
+        </script>
+            
+       
+            
+        <!-- ============================================================== -->
+        <!-- End Page content -->
+        <!-- ============================================================== -->
+
+
+{% endblock %}
+
+
+<div class="content-page">
+    <div class="content">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+
+            <h1>Make a Payment</h1>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Pay</button>
+            </form>
+
+        </div> <!-- container -->
+
+    </div> <!-- content -->
+
+    <!-- Footer Start -->
+    <footer class="footer">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    2020 - <?php echo date('Y'); ?> &copy; Hospital Management System. </a>
+                </div>
+    
+            </div>
+        </div>
+    </footer>
+    
+    <!-- end Footer -->
+
+</div>
+
+

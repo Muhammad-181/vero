@@ -1,0 +1,128 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+
+{% block title %}
+{{ request.user.username }}
+{% endblock %}
+
+
+
+{% block content %}
+            <!-- ============================================================== -->
+            <!-- Start Page Content here -->
+            <!-- ============================================================== -->
+       
+            <div class="content-page">
+                <div class="content">
+
+                    <!-- Start Content-->
+                    <div class="container-fluid">
+
+                        <!-- start page title -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box">
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Dashboard</a></li>
+                                            <li class="breadcrumb-item active">Profile</li>
+                                        </ol>
+                                    </div>
+                                    <h4 class="page-title">{{ student.last_name }} {{ student.first_name }}'s Profile</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end page title -->
+
+                        <div class="row">
+                            <div class="col-lg-4 col-xl-4">
+                                <div class="d-flex flex-column align-items-center text-center p-3">
+                                {% if request.user.studentprofile.profile_picture %}
+                                    <img src="{{ request.user.studentprofile.profile_picture.url }}" alt="dpic" 
+                                    class="rounded-circle " width="150px" style="border: 5px solid #016b4b;"> 
+                                {% else %}
+                                    <img src="{% static 'assets/images/anondp.jpg' %}" alt="dpic" 
+                                    class="rounded-circle " width="150px" style="border: 5px solid #016b4b;">
+                                {% endif %} <span class="font-weight-bold"> {{ student.first_name }} {{ student.other_names }} {{ student.last_name }}</span>
+                                    <span class="text-black-50">{{ student.user.username }}</span>
+                                     <span> </span>
+                                     </div>
+                               
+                            </div> <!-- end col-->
+
+                            <div class="col-lg-8 col-xl-8">
+                                <div class="card-box">
+                                    <div class="row mt-3 d-flex align-items-center flex-column">
+                                        <div class="col-md-12 mb-3 profileItemlist">
+                                            <div class=" profileHead">Name:</div>
+                                            <div class="fullName profileBody mb-2">{{ student.last_name }} {{ student.first_name }} {{ student.other_names }}</div>
+                                        </div>
+                                        <div class="col-md-12 mb-3 profileItemlist">
+                                            <div class="profileMatrichead profileHead">Matric:</div>
+                                            <div class="profileMatric profileBody mb-2">{{ request.user.username }}</div>
+                                        </div>
+                                        <div class="col-md-12 mb-3 profileItemlist">
+                                            <div class="profileMatrichead profileHead">Faculty:</div>
+                                            <div class="profileMatric profileBody mb-2">{{ student.faculty }}</div>
+                                        </div>
+                                        <div class="col-md-12 mb-3 profileItemlist">
+                                            <div class="profileMatrichead profileHead">Department:</div>
+                                            <div class="profileMatric profileBody mb-2">{{ student.department }}</div>
+                                        </div>
+                                        
+                                        
+                                        <div class="col-md-12 mb-3 profileItemlist">
+                                            <div class="profileDepartment profileHead">Admission Year:</div>
+                                            <div class="profileBody mb-2">{{ student.admission_year.admission_year  }}</div>
+                                        </div>
+                                        <div class="col-md-12 mb-3 profileItemlist">
+                                            <div class="profileDepartment profileHead">Level:</div>
+                                            <div class="profileBody mb-2">{{ student.admission_year }}</div>
+                                        </div>
+                                        <div class="col-md-12 mb-3 profileItemlist">
+                                            <div class="profileDepartment profileHead">Gender:</div>
+                                            <div class="profileBody mb-2">{{ student.get_Gender_display }}</div>
+                                        </div>
+                                        <div class="col-md-12 mb-3 profileItemlist">
+                                            <div class="profileDepartment profileHead">State:</div>
+                                            <div class="profileBody mb-2">{{ student.state }}</div>
+                                        </div>
+                                        <div class="col-md-12 mb-3 profileItemlist">
+                                            <div class="profileDepartment profileHead">Nationality:</div>
+                                            <div class="profileBody mb-2">{{ student.nationality }}</div>
+                                        </div>
+                                        <div class="col-md-12 mb-3 profileItemlist">
+                                            <div class="fullName profileHead">Phone:</div>
+                                            <div class="profileBody mb-2">{{ student.phone_number }}</div>
+                                        </div>
+                                        <div class="col-md-12 mb-3 profileItemlist">
+                                            <div class="fullName profileHead">Email:</div>
+                                            <div class="profileBody mb-2">{{ student.user.email }}</div>
+                                        </div>
+                                     
+                                    </div>
+                                </div> <!-- end card-box-->
+
+                            </div> <!-- end col -->
+                        </div>
+                        <!-- end row-->
+
+                    </div> <!-- container -->
+
+                </div> <!-- content -->
+
+                <!-- Footer Start -->
+                {% include "students/footer.html" %}
+                
+                <!-- end Footer -->
+
+            </div>
+       
+        <!-- ============================================================== -->
+        <!-- End Page content -->
+        <!-- ============================================================== -->
+
+
+{% endblock %}
+

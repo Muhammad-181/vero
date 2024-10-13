@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  {% load static %}
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment Verification</title>
+  
+  <link rel="shortcut icon" href="{% static 'assets/images/nacosnobg.png' %}">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">  
+
+  <style>
+    /* Resetting body and container margins for print alignment */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #f8f9fa;
+    }
+
+    .container {
+      background-color: #fff;
+      padding: 20px;
+      margin: 20px auto;
+      max-width: 600px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #007bff;
+      margin-bottom: 20px;
+    }
+
+    .status {
+      font-size: 24px;
+      font-weight: bold;
+      color: #fff;
+      padding: 10px;
+      border-radius: 5px;
+      margin: 10px 0;
+      text-align: center;
+    }
+
+    .verified {
+      background-color: #28a745; /* Green */
+    }
+
+    .not-verified {
+      background-color: #dc3545; /* Red */
+    }
+
+    .profile-info, .payment-info {
+      margin-bottom: 20px;
+      border: 1px solid #dee2e6;
+      padding: 15px;
+      border-radius: 5px;
+    }
+
+    .profile-info div, .payment-info div {
+      margin-bottom: 10px;
+    }
+
+    .profile-info strong, .payment-info strong {
+      font-weight: 700;
+    }
+
+    .print-btn {
+      display: block;
+      width: 100%;
+      max-width: 200px;
+      margin: 10px auto;
+      padding: 10px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .print-btn:hover {
+      background-color: #0056b3;
+    }
+
+    /* Print-specific styles */
+    @media print {
+      body {
+        background-color: white;
+      }
+
+      .print-btn {
+        display: none; /* Hide print button on print */
+      }
+
+      .container {
+        box-shadow: none; /* Remove box shadow for printing */
+        margin: 0; /* Remove margin to prevent second page */
+        padding: 0.5in; /* Small padding for print */
+        page-break-inside: avoid;
+      }
+    }
+  </style>
+
+  <script>
+    function printReceipt() {
+      window.print();
+    }
+  </script>
+</head>
+<body>
+  <div class="container">
+    <h1>Payment Verification</h1>
+
+    <h2>Student Information</h2>
+    <div class="profile-info">
+      <div><strong>Name:</strong> {{ payment.user.studentprofile.first_name }} 
+           {{ payment.user.studentprofile.other_name }} 
+           {{ payment.user.studentprofile.last_name }}</div>
+      <div><strong>Matric No:</strong> {{ payment.user.studentprofile.user.username }}</div>
+      <div><strong>Department:</strong> {{ payment.user.studentprofile.department }}</div>
+      <div><strong>Level:</strong> {{ payment.user.studentprofile.admission_year.level }}</div>
+      <div><strong>Payment:</strong> {{ payment.fee.name }}</div>
+      <div><strong>Amount:</strong> {{ payment.fee.amount }}</div>
+    </div>
+
+    <div class="payment-info">
+      {% if payment.verified %}
+      <div class="status verified">Paid</div>
+      <p>Your payment has been successfully processed.</p>
+      {% else %}
+      <div class="status not-verified">Failed</div>
+      <p>Your payment failed. Please try again later or contact support.</p>
+      {% endif %}
+
+      <div><strong>Reference:</strong> {{ payment.reference }}</div>
+      <div><strong>Timestamp:</strong> {{ payment.timestamp }}</div>
+    </div>
+
+    <!-- Print Button -->
+    <button class="print-btn" onclick="printReceipt()">Print Receipt</button>
+  </div>
+</body>
+</html>
