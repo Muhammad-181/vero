@@ -295,7 +295,8 @@ def forget_password(request):
                 user = User.objects.get(email=email)
                 
                 # Generate a new random password
-                new_password = get_random_string(length=6)
+                new_password = generate_random_password()
+                print(new_password)
                 
                 # Set the new password for the user
                 
